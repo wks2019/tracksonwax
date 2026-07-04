@@ -22,6 +22,7 @@
     --paper:#ECE6D8;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
   body{background:var(--black);color:var(--etch);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;}
 
   .banner{
@@ -124,9 +125,9 @@
     <div class="logo"><span class="puck"></span>Tracks on Wax</div>
     <nav class="nav">
       <a href="#catalog">Catalog</a>
-      <a href="#marketplace" aria-disabled="true">Marketplace</a>
-      <a href="#collection" aria-disabled="true">Collection</a>
-      <a href="#contribute" aria-disabled="true">Contribute</a>
+      <a href="#marketplace">Marketplace</a>
+      <a href="#collection">Collection</a>
+      <a href="#contribute">Contribute</a>
     </nav>
     <div class="topbar-right">
       <a href="#login" class="btn btn-ghost">Log in</a>
@@ -172,5 +173,101 @@
     </div>
   </div>
 
+
+  <!-- Marketplace section -->
+  <div id="marketplace" class="section" style="min-height:260px;display:flex;align-items:center;justify-content:center;border-top:1px solid var(--groove);">
+    <div style="text-align:center;">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--label-red);text-transform:uppercase;letter-spacing:0.12em;display:block;margin-bottom:14px;">Coming in Phase 2</span>
+      <div style="font-family:'Big Shoulders Display',sans-serif;font-size:28px;color:var(--paper);text-transform:uppercase;">Marketplace</div>
+      <p style="font-size:14px;color:var(--etch);opacity:0.65;margin-top:12px;max-width:400px;">Buy and sell physical records. Listings open once the catalog reaches critical mass. 6% flat transaction fee, no subscriptions.</p>
+    </div>
+  </div>
+
+  <!-- Collection section -->
+  <div id="collection" class="section" style="min-height:260px;display:flex;align-items:center;justify-content:center;border-top:1px solid var(--groove);">
+    <div style="text-align:center;">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--label-red);text-transform:uppercase;letter-spacing:0.12em;display:block;margin-bottom:14px;">Coming in Phase 2</span>
+      <div style="font-family:'Big Shoulders Display',sans-serif;font-size:28px;color:var(--paper);text-transform:uppercase;">Your Collection</div>
+      <p style="font-size:14px;color:var(--etch);opacity:0.65;margin-top:12px;max-width:400px;">Track every record you own and every one you want. Sign up to start building your list.</p>
+      <a href="#signup" class="btn btn-fill" style="display:inline-block;margin-top:20px;font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.05em;padding:11px 20px;border-radius:2px;background:var(--label-red);color:var(--paper);border:none;">Sign up free</a>
+    </div>
+  </div>
+
+  <!-- Contribute section -->
+  <div id="contribute" class="section" style="min-height:260px;display:flex;align-items:center;justify-content:center;border-top:1px solid var(--groove);">
+    <div style="text-align:center;">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--label-red);text-transform:uppercase;letter-spacing:0.12em;display:block;margin-bottom:14px;">Phase 1 · Open now</span>
+      <div style="font-family:'Big Shoulders Display',sans-serif;font-size:28px;color:var(--paper);text-transform:uppercase;">Add a Release</div>
+      <p style="font-size:14px;color:var(--etch);opacity:0.65;margin-top:12px;max-width:440px;">Catalog a record you own. Catalog number and label info matter most — that's what makes an entry useful to someone else. Free, no account limits.</p>
+      <a href="#signup" class="btn btn-fill" style="display:inline-block;margin-top:20px;font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.05em;padding:11px 20px;border-radius:2px;background:var(--label-red);color:var(--paper);border:none;">Get started</a>
+    </div>
+  </div>
+
+  <!-- Auth modal -->
+  <div id="auth-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:100;align-items:center;justify-content:center;">
+    <div style="background:var(--groove);border:1px solid #3a362e;border-radius:4px;padding:36px;width:100%;max-width:400px;position:relative;">
+      <button onclick="closeModal()" style="position:absolute;top:14px;right:18px;background:none;border:none;color:var(--etch);font-size:20px;cursor:pointer;">×</button>
+      <div id="auth-title" style="font-family:'Big Shoulders Display',sans-serif;font-size:26px;color:var(--paper);text-transform:uppercase;margin-bottom:6px;">Sign up</div>
+      <p style="font-size:13px;color:var(--etch);opacity:0.65;margin-bottom:22px;">Free. Track your collection and contribute to the catalog.</p>
+      <div id="auth-name-wrap" style="margin-bottom:14px;">
+        <label style="font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:var(--etch);display:block;margin-bottom:6px;">Name</label>
+        <input type="text" placeholder="Your name" style="width:100%;padding:11px 14px;background:var(--black);border:1px solid #3a362e;border-radius:2px;color:var(--paper);font-family:'Inter';font-size:14px;">
+      </div>
+      <div style="margin-bottom:14px;">
+        <label style="font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:var(--etch);display:block;margin-bottom:6px;">Email</label>
+        <input type="email" placeholder="you@example.com" style="width:100%;padding:11px 14px;background:var(--black);border:1px solid #3a362e;border-radius:2px;color:var(--paper);font-family:'Inter';font-size:14px;">
+      </div>
+      <div style="margin-bottom:20px;">
+        <label style="font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:var(--etch);display:block;margin-bottom:6px;">Password</label>
+        <input type="password" placeholder="Min. 8 characters" style="width:100%;padding:11px 14px;background:var(--black);border:1px solid #3a362e;border-radius:2px;color:var(--paper);font-family:'Inter';font-size:14px;">
+      </div>
+      <button onclick="closeModal()" style="width:100%;padding:13px;background:var(--label-red);color:var(--paper);border:none;border-radius:2px;font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.08em;cursor:pointer;" id="auth-submit">Create account</button>
+      <p style="font-size:12px;color:var(--etch);opacity:0.55;margin-top:16px;text-align:center;">
+        <span id="auth-switch-text">Already have an account?</span>
+        <a href="#" onclick="toggleAuth(event)" style="color:var(--label-red);text-decoration:underline;" id="auth-switch-link">Log in</a>
+      </p>
+    </div>
+  </div>
+
+<script>
+  // Auth modal
+  function openModal(mode) {
+    const modal = document.getElementById('auth-modal');
+    modal.style.display = 'flex';
+    setAuthMode(mode || 'signup');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    document.getElementById('auth-modal').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+  function setAuthMode(mode) {
+    const isLogin = mode === 'login';
+    document.getElementById('auth-title').textContent = isLogin ? 'Log in' : 'Sign up';
+    document.getElementById('auth-submit').textContent = isLogin ? 'Log in' : 'Create account';
+    document.getElementById('auth-name-wrap').style.display = isLogin ? 'none' : 'block';
+    document.getElementById('auth-switch-text').textContent = isLogin ? "Don't have an account?" : 'Already have an account?';
+    document.getElementById('auth-switch-link').textContent = isLogin ? 'Sign up' : 'Log in';
+    document.getElementById('auth-modal').dataset.mode = mode;
+  }
+  function toggleAuth(e) {
+    e.preventDefault();
+    const current = document.getElementById('auth-modal').dataset.mode;
+    setAuthMode(current === 'login' ? 'signup' : 'login');
+  }
+  // Close on backdrop click
+  document.getElementById('auth-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+  // Wire Log in / Sign up buttons
+  document.querySelectorAll('a[href="#login"]').forEach(el => {
+    el.addEventListener('click', e => { e.preventDefault(); openModal('login'); });
+  });
+  document.querySelectorAll('a[href="#signup"]').forEach(el => {
+    el.addEventListener('click', e => { e.preventDefault(); openModal('signup'); });
+  });
+  // Escape to close
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
 </body>
 </html>
