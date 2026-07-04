@@ -117,6 +117,31 @@
     .vinyl{width:280px;height:280px;}
     .label-center{width:130px;height:130px;}
   }
+
+  /* Search bar */
+  .search-bar{
+    padding:16px 40px;background:var(--groove);border-bottom:1px solid #2e2a22;
+    display:flex;align-items:center;gap:12px;
+  }
+  .search-bar input{
+    flex:1;padding:10px 16px;background:var(--black);border:1px solid #3a362e;
+    border-radius:2px;color:var(--paper);font-family:'JetBrains Mono',monospace;
+    font-size:12px;letter-spacing:0.04em;outline:none;
+  }
+  .search-bar input::placeholder{color:var(--etch);opacity:0.4;}
+  .search-bar input:focus{border-color:var(--label-red);}
+  .search-bar .search-icon{color:var(--etch);opacity:0.5;font-size:15px;flex-shrink:0;}
+  .search-bar .search-count{
+    font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--etch);
+    opacity:0.45;white-space:nowrap;text-transform:uppercase;letter-spacing:0.06em;
+  }
+  .card{transition:opacity .15s;}
+  .card.hidden{display:none;}
+  .search-no-results{
+    display:none;padding:48px;text-align:center;
+    font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--etch);
+    opacity:0.45;text-transform:uppercase;letter-spacing:0.08em;grid-column:1/-1;
+  }
 </style>
 </head>
 <body>
@@ -133,6 +158,12 @@
       <a href="#login" class="btn btn-ghost">Log in</a>
       <a href="#signup" class="btn btn-fill">Sign up</a>
     </div>
+  </div>
+
+  <div class="search-bar">
+    <span class="search-icon">&#9654;</span>
+    <input type="search" id="catalogSearch" placeholder="Search by title, artist, label, or catalog number..." oninput="filterCatalog(this.value)" autocomplete="off">
+    <span class="search-count" id="searchCount">4 releases</span>
   </div>
 
   <div class="hero">
@@ -259,6 +290,31 @@
   document.getElementById('auth-modal').addEventListener('click', function(e) {
     if (e.target === this) closeModal();
   });
+
+  // Catalog search
+  function filterCatalog(query) {
+    const q = query.trim().toLowerCase();
+    const cards = document.querySelectorAll('#catalog .card');
+    let visible = 0;
+    cards.forEach(card => {
+      const text = card.textContent.toLowerCase();
+      const match = !q || text.includes(q);
+      card.classList.toggle('hidden', !match);
+      if (match) visible++;
+    });
+    const countEl = document.getElementById('searchCount');
+    const noRes   = document.getElementById('noResults');
+    if (countEl) countEl.textContent = q ? visible + ' result' + (visible !== 1 ? 's' : '') : '4 releases';
+    if (noRes)   noRes.style.display = visible === 0 ? 'block' : 'none';
+  }
+  // Focus search on / key
+  document.addEventListener('keydown', e => {
+    if (e.key === '/' && document.activeElement.tagName !== 'INPUT') {
+      e.preventDefault();
+      document.getElementById('catalogSearch').focus();
+    }
+  });
+
   // Wire Log in / Sign up buttons
   document.querySelectorAll('a[href="#login"]').forEach(el => {
     el.addEventListener('click', e => { e.preventDefault(); openModal('login'); });
