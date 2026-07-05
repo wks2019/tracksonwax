@@ -309,9 +309,10 @@
   }
   // Focus search on / key
   document.addEventListener('keydown', e => {
-    if (e.key === '/' && document.activeElement.tagName !== 'INPUT') {
+    const el = document.getElementById('catalogSearch');
+    if (e.key === '/' && el && document.activeElement.tagName !== 'INPUT') {
       e.preventDefault();
-      document.getElementById('catalogSearch').focus();
+      el.focus();
     }
   });
 
