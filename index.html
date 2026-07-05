@@ -35,19 +35,38 @@
     padding:20px 40px;border-bottom:1px solid var(--groove);
   }
   .logo{
-    font-family:'Big Shoulders',sans-serif;font-weight:900;font-size:28px;letter-spacing:0.01em;
+    font-family:'Big Shoulders Display',sans-serif;font-weight:900;font-size:28px;letter-spacing:0.01em;
     color:var(--paper);display:flex;align-items:center;gap:12px;text-transform:uppercase;
   }
   .logo .puck{
     width:30px;height:30px;border-radius:50%;
     background:repeating-radial-gradient(circle, var(--etch) 0 1.2px, transparent 1.2px 3.5px);
     border:2px solid var(--label-red);
+    transition:transform .4s ease;
   }
+  .logo:hover .puck{transform:rotate(180deg);}
   .nav{display:flex;gap:30px;font-family:'JetBrains Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:0.05em;}
-  .nav a{color:var(--etch);opacity:0.7;}
-  .btn{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.05em;padding:9px 16px;border-radius:2px;}
+  .nav a{
+    color:var(--etch);opacity:0.7;position:relative;padding-bottom:4px;
+    transition:opacity .2s ease, color .2s ease;
+  }
+  .nav a::after{
+    content:'';position:absolute;left:0;bottom:0;height:1.5px;width:0;
+    background:var(--label-red);transition:width .25s ease;
+  }
+  .nav a:hover{opacity:1;color:var(--paper);}
+  .nav a:hover::after{width:100%;}
+  .btn{
+    font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;
+    letter-spacing:0.05em;padding:9px 16px;border-radius:2px;cursor:pointer;
+    transition:transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn:active{transform:translateY(0);}
   .btn-fill{background:var(--label-red);color:var(--paper);border:none;}
+  .btn-fill:hover{background:#E02347;box-shadow:0 6px 18px rgba(200,30,58,0.35);}
   .btn-ghost{background:transparent;color:var(--paper);border:1px solid var(--groove);}
+  .btn-ghost:hover{border-color:var(--label-red);}
   .topbar-right{display:flex;gap:10px;align-items:center;}
 
   .hero{
@@ -59,7 +78,7 @@
     text-transform:uppercase;letter-spacing:0.12em;margin-bottom:20px;display:block;
   }
   .hero h1{
-    font-family:'Big Shoulders',sans-serif;font-weight:800;font-size:64px;line-height:0.98;
+    font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:64px;line-height:0.98;
     color:var(--paper);text-transform:uppercase;letter-spacing:0.005em;margin-bottom:24px;
   }
   .hero h1 .accent{color:var(--label-red);}
@@ -76,9 +95,17 @@
       repeating-radial-gradient(circle, var(--groove) 0 2px, #1c1914 2px 4px);
     box-shadow:0 30px 60px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(255,255,255,0.04);
     animation:spin 14s linear infinite;
+    transition:box-shadow .3s ease;
+  }
+  .label-wrap:hover .vinyl{
+    animation-duration:6s;
+    box-shadow:0 30px 70px rgba(0,0,0,0.7), 0 0 40px rgba(200,30,58,0.15), inset 0 0 0 1px rgba(255,255,255,0.06);
   }
   @keyframes spin{ from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
-  @media(prefers-reduced-motion: reduce){ .vinyl{ animation: none; } }
+  @media(prefers-reduced-motion: reduce){
+    .vinyl{ animation: none; }
+    *{transition:none !important;}
+  }
   .vinyl::before{
     content:'';position:absolute;inset:0;border-radius:50%;
     background:radial-gradient(circle, transparent 60%, rgba(0,0,0,0.35) 100%);
@@ -90,7 +117,7 @@
     text-align:center;color:var(--paper);
     box-shadow:0 0 0 3px var(--black), 0 0 0 4px var(--groove);
   }
-  .label-center .lc-title{font-family:'Big Shoulders',sans-serif;font-weight:800;font-size:18px;text-transform:uppercase;line-height:1.1;}
+  .label-center .lc-title{font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:18px;text-transform:uppercase;line-height:1.1;}
   .label-center .lc-sub{font-family:'JetBrains Mono',monospace;font-size:9px;opacity:0.85;margin-top:6px;letter-spacing:0.06em;}
   .spindle{
     position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
@@ -100,12 +127,27 @@
   /* Section: real catalog cards in the new system */
   .section{padding:60px 40px;max-width:1200px;margin:0 auto;}
   .section-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:32px;}
-  .section-head h2{font-family:'Big Shoulders',sans-serif;font-weight:800;font-size:30px;color:var(--paper);text-transform:uppercase;}
+  .section-head h2{font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:30px;color:var(--paper);text-transform:uppercase;}
   .section-head .tag{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--label-red);text-transform:uppercase;letter-spacing:0.08em;}
 
   .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
-  .card{background:var(--groove);border:1px solid #322e26;border-radius:3px;overflow:hidden;}
-  .sleeve{aspect-ratio:1;background-size:cover;background-position:center;}
+  .card{
+    background:var(--groove);border:1px solid #322e26;border-radius:3px;overflow:hidden;
+    transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+    cursor:pointer;
+  }
+  .card:hover{
+    transform:translateY(-6px);
+    border-color:var(--label-red);
+    box-shadow:0 16px 36px rgba(0,0,0,0.5);
+  }
+  .sleeve{
+    aspect-ratio:1;background-size:cover;background-position:center;
+    transition:transform .4s ease;
+  }
+  .card:hover .sleeve{transform:scale(1.05);}
+  .card:hover .card-title{color:var(--label-red);}
+  .card-title{transition:color .2s ease;}
   .card-body{padding:14px 16px;}
   .card-title{font-family:'Inter';font-weight:600;font-size:13px;color:var(--paper);margin-bottom:4px;}
   .card-meta{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--etch);opacity:0.6;}
@@ -129,7 +171,8 @@
     font-size:12px;letter-spacing:0.04em;outline:none;
   }
   .search-bar input::placeholder{color:var(--etch);opacity:0.4;}
-  .search-bar input:focus{border-color:var(--label-red);}
+  .search-bar input{transition:border-color .2s ease, box-shadow .2s ease;}
+  .search-bar input:focus{border-color:var(--label-red);box-shadow:0 0 0 3px rgba(200,30,58,0.15);}
   .search-bar .search-icon{color:var(--etch);opacity:0.5;font-size:15px;flex-shrink:0;}
   .search-bar .search-count{
     font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--etch);
